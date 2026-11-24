@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbería Burzaco - Reserva de Turnos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="container">
+            <h1>Barbería Burzaco</h1>
+            <p class="subtitle">Sistema Web de Gestión de Turnos</p>
+            <nav class="tabs">
+                <button id="tab-cliente" class="tab-btn active" onclick="cambiarVista('cliente')">Reservar Turno</button>
+                <button id="tab-mis-turnos" class="tab-btn" onclick="cambiarVista('mis-turnos')">Mis Turnos</button>
+                <button id="tab-admin" class="tab-btn" onclick="cambiarVista('admin')">Panel Barbero</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- VISTA CLIENTE: RESERVA -->
+        <section id="vista-cliente" class="card">
+            <h2>1. Reservá tu horario</h2>
+            <form id="form-turno">
+                <div class="form-group">
+                    <label for="cliente-nombre">Nombre y Apellido</label>
+                    <input type="text" id="cliente-nombre" placeholder="Ej: Joaquín Maceiras" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cliente-telefono">Teléfono / WhatsApp</label>
+                    <input type="tel" id="cliente-telefono" placeholder="Ej: 1144449999" pattern="[0-9]{8,15}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="servicio">Servicio</label>
+                    <select id="servicio" required>
+                        <option value="Corte Clásico / Degradé ($8.000)">Corte Clásico / Degradé - $8.000</option>
+                        <option value="Arreglo de Barba ($5.000)">Arreglo de Barba - $5.000</option>
+                        <option value="Corte + Barba Completo ($11.500)">Corte + Barba Completo - $11.500</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="fecha">Elegí el día (Lunes a Sábado)</label>
+                    <input type="date" id="fecha" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Horarios disponibles</label>
+                    <div id="grilla-horarios" class="horarios-grid"></div>
+                    <input type="hidden" id="hora-seleccionada" required>
+                </div>
+
+                <div id="alerta" class="alerta oculto"></div>
+
+                <button type="submit" class="btn-primary">Confirmar Reserva</button>
+            </form>
+        </section>
+
+        <!-- VISTA CLIENTE: MIS TURNOS -->
+        <section id="vista-mis-turnos" class="card oculto">
+            <h2>Mis Turnos Activos</h2>
+            <p class="helper-text">Podés consultar o cancelar tus reservas activas desde acá.</p>
+            <div id="lista-mis-turnos" class="lista-turnos"></div>
+        </section>
+
+        <!-- VISTA ADMINISTRADOR: BARBERO -->
+        <section id="vista-admin" class="card oculto">
+            <div class="admin-header">
+                <h2>Agenda del Barbero</h2>
+                <input type="date" id="filtro-fecha-admin">
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Hora</th>
+                            <th>Cliente</th>
+                            <th>Teléfono</th>
+                            <th>Servicio</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-admin-body"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Desarrollado por Joaquín Lisandro Maceiras Cami - Taller de Proyectos II</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
